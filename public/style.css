@@ -1,0 +1,144 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  font-family: Arial;
+  background-color: grey;
+}
+
+button,
+input {
+  font-size: 1em;
+  font-family: Arial;
+}
+
+label {
+  font-weight: 900;
+}
+
+input {
+  border: 2px solid transparent;
+  border-radius: 6px;
+  padding: .4em .8em;
+  background-color: #E2E8F0;
+}
+
+input:focus {
+  background-color: #FFFFFF;
+  border: 2px solid #CBD5E0;
+  outline: 0;
+}
+
+button {
+  background:lightseagreen;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: blak;
+  padding: 5px;
+  box-shadow: inset 0 -3px seagreen;
+}
+
+button:active {
+  box-shadow: none;
+  transform: translateY(3px);
+}
+
+table {
+  width: 100%;
+}
+
+.error {
+  color: red;
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+.total {
+  font-size: 150%;
+}
+
+form {
+  margin-top: 25px;
+}
+.header{
+  background-color:whitesmoke;
+}
+
+.transactions {
+  text-align: left;
+  max-height: 300px;
+  overflow: auto;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.transaction-buttons {
+  margin-top: 25px;
+}
+
+.formrow{
+  margin:5px auto;
+
+}
+
+div{
+  margin:5px auto;
+  text-align:center;
+  
+}
+
+h4{
+  margin:5px auto;
+  text-align:center
+
+
+}
+p{
+  margin:5px auto;
+  text-align:center
+
+}
+
+select{
+
+border-radius:5px;
+}
+
+.depositeTable{
+  background-color: whitesmoke;
+  font-size: x-small;
+  border-radius:5px;
+}
+
+.withdrawTable{
+  background-color: whitesmoke;
+  font-size: x-small;
+  border-radius:5px;
+}
+.logDiv{
+  
+  margin-top:2px auto;
+  
+
+}
+.deleteLogButton{
+
+font-size: x-small;
+background-color: lightseagreen;
+border:1px solid darkcyan;
+border-radius:5px;
+width:50%;
+height:50%;
+}
+
+.deleteLogButton:hover{
+
+  background-color: seagreen;
+}
