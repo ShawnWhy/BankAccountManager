@@ -72,7 +72,7 @@ router.post("/api/withdraw", function(req,res) {
     });
 });
 router.post("/api/deleteWithdraw/:id",function(req,res){
-  var deleteID = req.params.id;
+  var deleteID = req.params.id; 
   console.log(deleteID);
   Transaction.deleteOne({_id:deleteID},
     function(deleteID){console.log(deleteID);
@@ -99,25 +99,49 @@ router.post("/api/deleteDeposite/:id",function(req,res){
 })
 
 
-router.post("/api/transaction/bulk", ({ body }, res) => {
-  Transaction.insertMany(body)
-    .then((dbTransaction) => {
-      res.json(dbTransaction);
-    })
-    .catch(err => {
-      res.status(400).json(err);
-    });
-});
+// router.post("/api/deposite/bulk", ({ body }, res) => {
+//   Transaction.insertMany(body)
+//   .then(({_id})=>{TransactionType.findOneAndUpdate({name:"deposite"},{$push:{transactions:_id}},{new:true})})
+//     .then((dbTransaction) => {
+//       res.json(dbTransaction);
+//     })
+//     .catch(err => {
+//       res.status(400).json(err);
+//     });
+// });
 
-router.get("/api/transaction", (req, res) => {
-  Transaction.find({})
-    .sort({ date: -1 })
-    .then((dbTransaction) => {
-      res.json(dbTransaction);
-    })
-    .catch(err => {
-      res.status(400).json(err);
-    });
-});
+// router.post("/api/withdraw/bulk", ({ body }, res) => {
+//   Transaction.insertMany(body)
+//   .then(({_id})=>{TransactionType.findOneAndUpdate({name:"withdraw"},{$push:{transactions:_id}},{new:true})})
+//     .then((dbTransaction) => {
+//       res.json(dbTransaction);
+//     })
+//     .catch(err => {
+//       res.status(400).json(err);
+//     });
+// });
+
+// router.post("/api/balance/bulk", ({ body }, res) => {
+//   balance.findOneAndUpdate({name:"myBalance"},{value:body.value})
+//     .then((dbTransaction) => {
+//       res.json(dbTransaction);
+//     })
+//     .catch(err => {
+//       res.status(400).json(err);
+//     });
+// });
+
+
+
+// router.get("/api/transaction", (req, res) => {
+//   Transaction.find({})
+//     .sort({ date: -1 })
+//     .then((dbTransaction) => {
+//       res.json(dbTransaction);
+//     })
+//     .catch(err => {
+//       res.status(400).json(err);
+//     });
+// });
 
 module.exports = router;

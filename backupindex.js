@@ -1,4 +1,12 @@
 
+
+
+
+
+
+
+
+
 let myChart;
 var balance;
 var withdrawArray=[];
@@ -13,21 +21,25 @@ var balance = $("#balance");
 $(".alert").hide();
 $("form").hide();
 
-$.get("/api/balance")
-  .then(response => {
-    console.log(response);
-    balance=response.value;
+fetch("/api/balance",{
+  
+})
+  .then(data => {
+    console.log(data);
+    balance=data.value;
     console.log(balance);
     if(balance<1000){
       $(".alert").show(50);
     }
     $(".balance").text(`you have $ ${balance} American Dollars in the Bank`);
   })
-$.get("/api/deposite")
-  .then(response => {
-    console.log(response)
+fetch("/api/deposite",{
+  
+})
+  .then(data => {
+    console.log(data)
     depositeTotal=0;
-    depositeArrays=response.transactions;
+    depositeArrays=data.transactions;
     console.log(depositeArrays);
     depositeArrays.forEach(function(item){
       depositeTotal+=item.value
@@ -49,12 +61,14 @@ $.get("/api/deposite")
     
     
   });
-  $.get("/api/withdraw")
+ fetch("/api/withdraw",{
   
-    .then(response => {
-      console.log(response)
+ })
+  
+    .then(data => {
+      console.log(data)
       withdrawTotal=0;
-      withdrawArray=response.transactions;
+      withdrawArray=data.transactions;
       console.log(withdrawArray);
       withdrawArray.forEach(function(item){
         withdrawTotal+=item.value
@@ -113,7 +127,9 @@ $(document).on("click",".withdrawLogDelete",function(event){
   balance +=deleteNumber;
   console.log(balance);
   balance= balance.toString()
-  $.post("/api/balance/"+balance).then(result=>{
+  fetch("/api/balance/"+balance,{
+    method:"POST"
+  }).then(result=>{
     console.log(JSON.stringify(result))
   });
   $.post("/api/deleteWithdraw/"+ deleteID).then(result=>{
@@ -131,10 +147,14 @@ $(document).on("click",".depositeLogDelete",function(event){
   console.log(deleteID) ;
   balance -= deleteNumber;
   console.log(balance);
-  $.post("/api/balance/"+ balance).then(result=>{
+  fetch("/api/balance/"+ balance,{
+    method:"POST"
+  }).then(result=>{
     console.log(result)
   })
-  $.post("/api/deleteDeposite/"+ deleteID,).then(result=>{
+  fetch("/api/deleteDeposite/"+ deleteID,{
+    method:"POST"
+  }).then(result=>{
     console.log(result)
     location.reload();
   })
@@ -159,7 +179,7 @@ console.log(newBody);
 if(type=="deposite"){
   $.post("/api/deposite",newBody,
   ).then(
-    response=>{console.log(response)})
+    data=>{console.log(data)})
     .then(data => {if(data.errors){
       console.log("errs with deposite")
 }})
@@ -168,8 +188,10 @@ if(type=="deposite"){
 
    balance+=parseFloat(value);
     console.log(balance);
-  $.post("api/balance/"+balance).then(response=>
-    console.log(response))
+  fetch("api/balance/"+balance,{
+    method:"POST"
+  }).then(data=>
+    console.log(data))
      .then(data => {if(data.errors){
     console.log("errs with balanceupdate")
 }})
@@ -178,7 +200,9 @@ saveBalance(balance)});
 
   }
   else{
-$.post("/api/withdraw",newBody).then(
+fetch("/api/withdraw",{
+  method:"POST",
+  body:newBody}).then(
   data=>{console.log(data)})
   .then
   balance-=parseFloat(value);
@@ -188,7 +212,10 @@ $.post("/api/withdraw",newBody).then(
 }})
 .catch(err=>{
   saveRecord(newBody,"deposite")});
-$.post("api/balance/"+ balance).then(response=>
+fetch("api/balance/"+ balance,{
+  method:"POST",
+  
+}).then(response=>
   console.log(response))
   .then(data => {if(data.errors){
     console.log("errs with balanceupdate")
@@ -316,4 +343,3 @@ $("form").show();
 //   event.preventDefault();
 //   sendTransaction(false);
 // });
-
